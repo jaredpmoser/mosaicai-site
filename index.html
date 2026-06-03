@@ -3,55 +3,973 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mosaic AI</title>
+  <title>Mosaic AI — Your Business. Your AI. Made Simple.</title>
+  <meta name="description" content="St. Charles and West St. Louis County's premier AI consulting and automation firm for small and mid-size businesses. Custom AI agents, automation workflows, and business AI — no technical background required." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
   <style>
+    :root {
+      --ink: #0f1117;
+      --ink-soft: #3a3d4a;
+      --ink-muted: #6b6f80;
+      --surface: #f9f8f5;
+      --surface-warm: #f2efe8;
+      --accent: #1a4fd6;
+      --accent-light: #e8eefb;
+      --accent-vivid: #2563eb;
+      --gold: #c8a94a;
+      --gold-light: #fdf6e3;
+      --border: #e2ddd4;
+      --white: #ffffff;
+      --radius: 4px;
+      --radius-lg: 12px;
+    }
+
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: #0f0f13;
-      color: #e8e8f0;
+      font-family: 'DM Sans', sans-serif;
+      background: var(--surface);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      height: 68px;
+      background: rgba(249,248,245,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-logo span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--ink-soft);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    .nav-cta {
+      background: var(--accent);
+      color: var(--white) !important;
+      padding: 0.5rem 1.25rem;
+      border-radius: var(--radius);
+      font-weight: 600 !important;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: var(--accent-vivid) !important; color: var(--white) !important; }
+
+    /* ── HERO ── */
+    .hero {
       min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 120px 5% 80px;
+      gap: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(26,79,214,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.85rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.1s ease forwards;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.6rem, 5vw, 4rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.2s ease forwards;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--ink-soft);
+      line-height: 1.7;
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.3s ease forwards;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.4s ease forwards;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent);
+      color: var(--white);
+      padding: 0.85rem 1.75rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover { background: var(--accent-vivid); transform: translateY(-1px); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      color: var(--ink);
+      padding: 0.85rem 1.75rem;
+      border-radius: var(--radius);
+      font-weight: 500;
+      font-size: 0.95rem;
+      text-decoration: none;
+      border: 1.5px solid var(--border);
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* Hero visual */
+    .hero-visual {
+      position: relative;
+      opacity: 0;
+      animation: fadeIn 0.8s 0.5s ease forwards;
+    }
+
+    .hero-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: 0 4px 24px rgba(15,17,23,0.06), 0 1px 4px rgba(15,17,23,0.04);
+    }
+
+    .card-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 1rem;
+    }
+
+    .ai-chat-row {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 0.85rem;
+      align-items: flex-start;
+    }
+
+    .ai-chat-row.user { flex-direction: row-reverse; }
+
+    .chat-bubble {
+      background: var(--surface-warm);
+      border-radius: 12px 12px 12px 2px;
+      padding: 0.65rem 1rem;
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+      max-width: 80%;
+      line-height: 1.5;
+    }
+
+    .ai-chat-row.user .chat-bubble {
+      background: var(--accent);
+      color: var(--white);
+      border-radius: 12px 12px 2px 12px;
+    }
+
+    .chat-avatar {
+      width: 28px; height: 28px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
     }
-    .hero {
+
+    .avatar-ai { background: var(--accent-light); color: var(--accent); }
+    .avatar-user { background: var(--surface-warm); color: var(--ink-muted); }
+
+    .typing-indicator {
+      display: flex;
+      gap: 4px;
+      padding: 0.65rem 1rem;
+      background: var(--surface-warm);
+      border-radius: 12px 12px 12px 2px;
+      width: fit-content;
+    }
+
+    .dot {
+      width: 6px; height: 6px;
+      background: var(--ink-muted);
+      border-radius: 50%;
+      animation: pulse 1.2s infinite;
+    }
+    .dot:nth-child(2) { animation-delay: 0.2s; }
+    .dot:nth-child(3) { animation-delay: 0.4s; }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 1.25rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .stat { text-align: center; }
+    .stat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
+      color: var(--ink);
+      display: block;
+    }
+    .stat-label {
+      font-size: 0.72rem;
+      color: var(--ink-muted);
+      font-weight: 500;
+    }
+
+    /* ── TRUST BAR ── */
+    .trust-bar {
+      background: var(--ink);
+      color: rgba(255,255,255,0.7);
+      padding: 1rem 5%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      flex-wrap: wrap;
+    }
+
+    .trust-item { display: flex; align-items: center; gap: 0.5rem; }
+    .trust-item svg { opacity: 0.6; }
+
+    /* ── SECTIONS ── */
+    section { padding: 80px 5%; }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.75rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 1rem;
+      max-width: 600px;
+    }
+
+    .section-body {
+      font-size: 1rem;
+      color: var(--ink-soft);
+      max-width: 580px;
+      line-height: 1.75;
+      font-weight: 300;
+    }
+
+    /* ── PROBLEM/SOLUTION ── */
+    .problem-section {
+      background: var(--surface-warm);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .pain-list {
+      list-style: none;
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .pain-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 1rem 1.25rem;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+    }
+
+    .pain-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .pain-text strong { display: block; font-size: 0.9rem; color: var(--ink); margin-bottom: 0.2rem; }
+    .pain-text span { font-size: 0.82rem; color: var(--ink-muted); }
+
+    /* ── SERVICES ── */
+    .services-section { background: var(--white); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .service-card {
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      background: var(--surface);
+    }
+
+    .service-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(26,79,214,0.1);
+    }
+
+    .service-card.featured {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--white);
+    }
+
+    .service-card.featured:hover {
+      box-shadow: 0 8px 32px rgba(26,79,214,0.3);
+    }
+
+    .service-badge {
+      position: absolute;
+      top: -12px; right: 1.5rem;
+      background: var(--gold);
+      color: var(--white);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.75rem;
+      border-radius: 100px;
+    }
+
+    .service-price {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem;
+      color: var(--ink);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+
+    .service-card.featured .service-price { color: var(--white); }
+
+    .service-period {
+      font-size: 0.8rem;
+      color: var(--ink-muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .service-card.featured .service-period { color: rgba(255,255,255,0.7); }
+
+    .service-name {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 0.75rem;
+    }
+
+    .service-card.featured .service-name { color: var(--white); }
+
+    .service-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .service-features li {
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+      display: flex;
+      gap: 0.6rem;
+      align-items: flex-start;
+    }
+
+    .service-card.featured .service-features li { color: rgba(255,255,255,0.85); }
+
+    .service-features li::before {
+      content: '✓';
+      color: var(--accent);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .service-card.featured .service-features li::before { color: rgba(255,255,255,0.9); }
+
+    .service-cta {
+      display: block;
       text-align: center;
+      padding: 0.7rem;
+      border-radius: var(--radius);
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1.5px solid var(--border);
+      color: var(--ink);
+      transition: all 0.2s;
+    }
+
+    .service-cta:hover { border-color: var(--accent); color: var(--accent); }
+    .service-card.featured .service-cta { background: var(--white); color: var(--accent); border-color: transparent; }
+    .service-card.featured .service-cta:hover { background: rgba(255,255,255,0.9); }
+
+    /* ── VERTICALS ── */
+    .verticals-section { background: var(--surface-warm); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+    .verticals-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+
+    .vertical-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.5rem;
+      text-align: center;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .vertical-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+
+    .vertical-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+    .vertical-name { font-size: 0.9rem; font-weight: 600; color: var(--ink); margin-bottom: 0.35rem; }
+    .vertical-range { font-size: 0.78rem; color: var(--accent); font-weight: 500; }
+
+    /* ── FOUNDER ── */
+    .founder-section { background: var(--white); }
+
+    .founder-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .founder-credentials {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 2rem;
+    }
+
+    .credential {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.875rem;
+      color: var(--ink-soft);
+    }
+
+    .credential-dot {
+      width: 8px; height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .founder-quote-block {
+      background: var(--surface-warm);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
       padding: 2rem;
     }
-    .logo {
-      font-size: 3rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      background: linear-gradient(135deg, #a78bfa, #60a5fa);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 1rem;
+
+    .founder-quote {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem;
+      line-height: 1.5;
+      color: var(--ink);
+      font-style: italic;
+      margin-bottom: 1.25rem;
     }
-    .tagline {
-      font-size: 1.25rem;
-      color: #9ca3af;
-      max-width: 480px;
-      line-height: 1.6;
-      margin-bottom: 2rem;
+
+    .founder-sig {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--ink-soft);
     }
-    .badge {
-      display: inline-block;
-      padding: 0.5rem 1.25rem;
-      border: 1px solid #374151;
-      border-radius: 9999px;
-      font-size: 0.875rem;
-      color: #6b7280;
-      letter-spacing: 0.05em;
+
+    .founder-sig span { color: var(--ink-muted); font-weight: 400; display: block; margin-top: 0.2rem; }
+
+    /* ── CTA SECTION ── */
+    .cta-section {
+      background: var(--ink);
+      color: var(--white);
+      text-align: center;
+      padding: 100px 5%;
+    }
+
+    .cta-section .section-label { color: var(--gold); }
+
+    .cta-section .section-title {
+      color: var(--white);
+      max-width: 640px;
+      margin: 0 auto 1rem;
+    }
+
+    .cta-section .section-body {
+      color: rgba(255,255,255,0.65);
+      margin: 0 auto 2.5rem;
+    }
+
+    .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    .btn-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--white);
+      color: var(--ink);
+      padding: 0.9rem 2rem;
+      border-radius: var(--radius);
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .btn-white:hover { background: var(--surface-warm); }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      color: rgba(255,255,255,0.8);
+      padding: 0.9rem 2rem;
+      border-radius: var(--radius);
+      font-weight: 500;
+      font-size: 0.95rem;
+      text-decoration: none;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.5); color: var(--white); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.45);
+      padding: 2rem 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .footer-logo span { color: var(--accent); }
+    footer a { color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: rgba(255,255,255,0.8); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes pulse {
+      0%, 60%, 100% { transform: scale(1); opacity: 0.4; }
+      30% { transform: scale(1.3); opacity: 1; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; padding: 100px 5% 60px; gap: 3rem; }
+      .hero-visual { order: -1; }
+      .problem-grid, .founder-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      nav { padding: 0 4%; }
+      .nav-links { display: none; }
+      .trust-bar { gap: 1.5rem; }
     }
   </style>
 </head>
 <body>
-  <div class="hero">
-    <div class="logo">Mosaic AI</div>
-    <p class="tagline">Building intelligent systems, piece by piece.</p>
-    <span class="badge">Coming soon &mdash; mosaicai.io</span>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Mosaic<span>AI</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#verticals">Who We Serve</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact" class="nav-cta">Get Started</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">St. Charles &amp; West St. Louis County</div>
+    <h1>AI that works the way your <em>business</em> works</h1>
+    <p class="hero-sub">Custom AI agents, automation workflows, and business AI — built by a 20-year industry veteran for local businesses. No technical background required.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Schedule a Free Consult →</a>
+      <a href="#services" class="btn-secondary">View Services</a>
+    </div>
   </div>
+
+  <div class="hero-visual">
+    <div class="hero-card">
+      <div class="card-label">Your AI. In Action.</div>
+      <div class="ai-chat-row user">
+        <div class="chat-avatar avatar-user">You</div>
+        <div class="chat-bubble">Can you write a response to this negative Google review?</div>
+      </div>
+      <div class="ai-chat-row">
+        <div class="chat-avatar avatar-ai">AI</div>
+        <div class="chat-bubble">Of course! Here's a professional response tailored to your restaurant's voice...</div>
+      </div>
+      <div class="ai-chat-row user">
+        <div class="chat-avatar avatar-user">You</div>
+        <div class="chat-bubble">Perfect. Now draft this week's specials post for Instagram.</div>
+      </div>
+      <div class="ai-chat-row">
+        <div class="chat-avatar avatar-ai">AI</div>
+        <div class="typing-indicator">
+          <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num">20+</span><span class="stat-label">Years Experience</span></div>
+        <div class="stat"><span class="stat-num">100%</span><span class="stat-label">Custom-Built</span></div>
+        <div class="stat"><span class="stat-num">Local</span><span class="stat-label">St. Charles Based</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    Built by a 20-Year AI Industry Veteran
+  </div>
+  <div class="trust-item">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    No Technical Background Required
+  </div>
+  <div class="trust-item">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    Serving St. Charles &amp; West STL County
+  </div>
+  <div class="trust-item">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+    Custom-Tailored to Your Business
+  </div>
+</div>
+
+<!-- PROBLEM / WHY NOW -->
+<section class="problem-section" id="why">
+  <div class="problem-grid">
+    <div>
+      <div class="section-label">The Problem</div>
+      <h2 class="section-title">Most businesses know AI is changing everything. But don't know where to start.</h2>
+      <p class="section-body">Generic AI tools are built for everyone — which means they're built for no one. Your business has a unique voice, workflows, and customers. You need AI that actually knows your business.</p>
+      <ul class="pain-list">
+        <li class="pain-item">
+          <span class="pain-icon">⏱️</span>
+          <div class="pain-text">
+            <strong>Spending hours on repetitive tasks</strong>
+            <span>Writing the same emails, social posts, and responses over and over.</span>
+          </div>
+        </li>
+        <li class="pain-item">
+          <span class="pain-icon">🤯</span>
+          <div class="pain-text">
+            <strong>Overwhelmed by AI options</strong>
+            <span>ChatGPT, Claude, Gemini — which one? And how do you actually use it?</span>
+          </div>
+        </li>
+        <li class="pain-item">
+          <span class="pain-icon">💸</span>
+          <div class="pain-text">
+            <strong>Paying for tools that don't fit</strong>
+            <span>Subscriptions that promise everything but deliver generic, off-brand results.</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <div class="section-label">The Solution</div>
+      <h2 class="section-title">AI custom-built for the way you run your business.</h2>
+      <p class="section-body">Mosaic AI designs and deploys AI agents trained specifically on your business — your voice, your customers, your workflows. We don't hand you a tool and walk away. We build, configure, and stay with you.</p>
+      <br />
+      <p class="section-body">Founded by Jared Moser — a Solution Architect with over 20 years in AI and data center infrastructure — Mosaic AI brings enterprise-grade expertise to Main Street businesses across St. Charles and West St. Louis County.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-section" id="services">
+  <div style="text-align:center; margin-bottom: 1rem;">
+    <div class="section-label">Services &amp; Pricing</div>
+    <h2 class="section-title" style="margin: 0 auto;">Simple, transparent pricing. No surprises.</h2>
+  </div>
+
+  <div class="services-grid">
+
+    <div class="service-card">
+      <div class="service-price">$500</div>
+      <div class="service-period">one-time + $99/mo</div>
+      <div class="service-name">Starter</div>
+      <ul class="service-features">
+        <li>Custom AI workspace setup</li>
+        <li>3 core business context docs</li>
+        <li>2–3 pre-built prompt templates</li>
+        <li>1-hour training session</li>
+      </ul>
+      <a href="#contact" class="service-cta">Get Started</a>
+    </div>
+
+    <div class="service-card featured">
+      <div class="service-badge">Most Popular</div>
+      <div class="service-price">$1,500</div>
+      <div class="service-period">one-time + $199/mo</div>
+      <div class="service-name">Pro</div>
+      <ul class="service-features">
+        <li>Everything in Starter</li>
+        <li>Full automation workflow design</li>
+        <li>Website build (AI-assisted)</li>
+        <li>CRM, calendar &amp; email integration</li>
+        <li>3 hours training + 30-day support</li>
+      </ul>
+      <a href="#contact" class="service-cta">Get Started</a>
+    </div>
+
+    <div class="service-card">
+      <div class="service-price">$299</div>
+      <div class="service-period">per month, ongoing</div>
+      <div class="service-name">Managed AI</div>
+      <ul class="service-features">
+        <li>Monthly AI doc updates</li>
+        <li>New templates as needed</li>
+        <li>AI tool stack management</li>
+        <li>Priority support</li>
+        <li>Quarterly strategy session</li>
+      </ul>
+      <a href="#contact" class="service-cta">Get Started</a>
+    </div>
+
+    <div class="service-card">
+      <div class="service-price">$2K–5K</div>
+      <div class="service-period">one-time build</div>
+      <div class="service-name">Custom AI Agent</div>
+      <ul class="service-features">
+        <li>Fully custom AI agent</li>
+        <li>Trained on your business</li>
+        <li>Website / social / internal integration</li>
+        <li>All Pro deliverables included</li>
+        <li>Optional ongoing management</li>
+      </ul>
+      <a href="#contact" class="service-cta">Let's Talk</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- VERTICALS -->
+<section class="verticals-section" id="verticals">
+  <div style="text-align:center;">
+    <div class="section-label">Who We Serve</div>
+    <h2 class="section-title" style="margin: 0 auto 0.75rem;">Built for local businesses across St. Charles and West St. Louis County.</h2>
+    <p class="section-body" style="margin: 0 auto;">Every vertical has different AI needs. We know them all.</p>
+  </div>
+
+  <div class="verticals-grid">
+    <div class="vertical-card">
+      <div class="vertical-icon">🍽️</div>
+      <div class="vertical-name">Restaurants &amp; Cafes</div>
+      <div class="vertical-range">$199–$399/mo</div>
+    </div>
+    <div class="vertical-card">
+      <div class="vertical-icon">🔨</div>
+      <div class="vertical-name">Contractors &amp; Home Services</div>
+      <div class="vertical-range">$299–$499/mo</div>
+    </div>
+    <div class="vertical-card">
+      <div class="vertical-icon">🏠</div>
+      <div class="vertical-name">Real Estate</div>
+      <div class="vertical-range">$299–$499/mo</div>
+    </div>
+    <div class="vertical-card">
+      <div class="vertical-icon">🏥</div>
+      <div class="vertical-name">Medical &amp; Dental</div>
+      <div class="vertical-range">$399–$599/mo</div>
+    </div>
+    <div class="vertical-card">
+      <div class="vertical-icon">🛍️</div>
+      <div class="vertical-name">Local Retail &amp; SMBs</div>
+      <div class="vertical-range">$199–$299/mo</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER / ABOUT -->
+<section class="founder-section" id="about">
+  <div class="founder-grid">
+    <div>
+      <div class="section-label">About</div>
+      <h2 class="section-title">20 years in AI. Now working for Main Street.</h2>
+      <p class="section-body">Jared Moser spent over two decades designing AI and data center infrastructure for enterprises. He's seen firsthand how transformative the right AI implementation can be — and how inaccessible it has been for small businesses. Mosaic AI exists to close that gap.</p>
+      <div class="founder-credentials">
+        <div class="credential"><div class="credential-dot"></div>20+ years AI &amp; data center infrastructure</div>
+        <div class="credential"><div class="credential-dot"></div>Solution Architect — enterprise AI deployments</div>
+        <div class="credential"><div class="credential-dot"></div>Google Cloud Next presenter</div>
+        <div class="credential"><div class="credential-dot"></div>Based in Wright City, MO — serving our neighbors</div>
+      </div>
+    </div>
+    <div class="founder-quote-block">
+      <p class="founder-quote">"Most businesses know AI is changing everything — but don't know where to start. That's exactly where I come in."</p>
+      <div class="founder-sig">
+        Jared P. Moser
+        <span>Founder, Mosaic AI · Solution Architect · 20+ Years in AI</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="section-label">Get Started</div>
+  <h2 class="section-title">Ready to put AI to work for your business?</h2>
+  <p class="section-body">Schedule a free 30-minute consultation. No tech knowledge required — just bring your business challenges and we'll figure out the rest.</p>
+  <div class="cta-actions">
+    <a href="mailto:jp@mosaicai.io" class="btn-white">📧 jp@mosaicai.io</a>
+    <a href="tel:3149740014" class="btn-ghost">📞 (314) 974-0014</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Mosaic<span>AI</span></div>
+  <div>© 2026 Moser Ventures LLC DBA Mosaic AI · Foristell, MO</div>
+  <div><a href="mailto:jp@mosaicai.io">jp@mosaicai.io</a></div>
+</footer>
+
 </body>
 </html>
